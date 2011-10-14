@@ -43,13 +43,13 @@ public class HyphenatorTest {
     
     @Test
     public void shouldRemoveNonAlphanumericalCharacterWhenHyphenating() {
-    	assertThat(hyphenator.hyphenizeIt("- a alphanumerical - text !@#$%ˆ&*()_+~`'\"{}[]:;<,>.?/"))
+    	assertThat(hyphenator.hyphenizeIt("- a alphanumerical - text !@#$%^&*()_+~`'\"{}[]:;<,>.?/"))
     		.isEqualTo("a-alphanumerical-text");
     }
     
     @Test
     public void shouldConvertAccentedCharactersIntoNormalOnesWhenHyphenating() {
-    	assertThat(hyphenator.hyphenizeIt("á-ãçcéñtéd-tèxt"))
+    	assertThat(hyphenator.hyphenizeIt("·-„ÁcËÒTÈd-T…xT"))
     		.isEqualTo("a-accented-text");
     }
 }
