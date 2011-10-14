@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.ioc.Component;
-import br.com.tealdi.talkabout.dao.Subject;
+import br.com.tealdi.talkabout.dao.SubjectDao;
 import br.com.tealdi.talkabout.helper.DatabaseAccess;
 
 @Component
@@ -16,12 +16,12 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		this.databaseAccess = databaseAccess;
 	}
 	
-	public Subject findBy(String name) {
+	public SubjectDao findBy(String name) {
 		Session session = databaseAccess.getSession();
 		
-		Subject subjectFound = 
-			(Subject) session
-				.createCriteria(Subject.class)
+		SubjectDao subjectFound = 
+			(SubjectDao) session
+				.createCriteria(SubjectDao.class)
 				.add(Restrictions.eq("name", name))
 				.list()
 				.get(0);

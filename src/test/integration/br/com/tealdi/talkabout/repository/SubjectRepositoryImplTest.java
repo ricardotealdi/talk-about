@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.tealdi.talkabout.DatabaseDependentTest;
-import br.com.tealdi.talkabout.dao.Subject;
+import br.com.tealdi.talkabout.dao.SubjectDao;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -22,19 +22,19 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 	public void shouldFindByName() {
 		givenThereIsOneSubjectOnDatabase();
 		
-		Subject subjectFound = repository.findBy("a-subject");
+		SubjectDao subjectFound = repository.findBy("a-subject");
 		
 		assertThat(subjectFound.getId()).isEqualTo(1);
 		assertThat(subjectFound.getName()).isEqualTo("a-subject");
 	}
 
 	private void givenThereIsOneSubjectOnDatabase() {
-		Subject subjectToBeAdded = createSubject(1, "a-subject");
+		SubjectDao subjectToBeAdded = createSubject(1, "a-subject");
 		
 		persistIt(subjectToBeAdded);
 	}
 
-	private void persistIt(Subject subjectToBeAdded) {
+	private void persistIt(SubjectDao subjectToBeAdded) {
 		Session session = getDatabaseAccess().getSession();
 		session.beginTransaction();
 		session.save(subjectToBeAdded);
@@ -42,8 +42,8 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 		session.close();
 	}
 
-	private Subject createSubject(int id, String subject) {
-		Subject subjectToBeAdded = new Subject();
+	private SubjectDao createSubject(int id, String subject) {
+		SubjectDao subjectToBeAdded = new SubjectDao();
 		subjectToBeAdded.setId(id);
 		subjectToBeAdded.setName(subject);
 		return subjectToBeAdded;
