@@ -1,7 +1,7 @@
 package br.com.tealdi.talkabout.repository;
 
-import br.com.tealdi.talkabout.dao.SubjectDao;
+import br.com.tealdi.talkabout.model.Subject;
 
 public interface SubjectRepository {
-	public abstract SubjectDao findBy(String name);
+	public abstract Subject findBy(String name);
 }

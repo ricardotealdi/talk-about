@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.tealdi.talkabout.DatabaseDependentTest;
+import br.com.tealdi.talkabout.converter.SubjectConverterImpl;
 import br.com.tealdi.talkabout.dao.SubjectDao;
+import br.com.tealdi.talkabout.model.Subject;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -15,17 +17,24 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 
 	@Before
 	public void setUp() {
-		repository = new SubjectRepositoryImpl(getDatabaseAccess()); 
+		repository = new SubjectRepositoryImpl(getDatabaseAccess(), new SubjectConverterImpl()); 
 	}
 	
 	@Test
 	public void shouldFindByName() {
 		givenThereIsOneSubjectOnDatabase();
 		
-		SubjectDao subjectFound = repository.findBy("a-subject");
+		Subject subjectFound = repository.findBy("a-subject");
 		
 		assertThat(subjectFound.getId()).isEqualTo(1);
 		assertThat(subjectFound.getName()).isEqualTo("a-subject");
+	}
+	
+	@Test
+	public void shouldRetrieveANullSubjectWhenFindingByNameRetrievesNoResults() {
+		Subject subjectFound = repository.findBy("non-persisted");
+		
+		assertThat(subjectFound).isEqualTo(Subject.Null());
 	}
 
 	private void givenThereIsOneSubjectOnDatabase() {

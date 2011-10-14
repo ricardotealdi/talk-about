@@ -11,7 +11,7 @@ import br.com.tealdi.talkabout.model.Subject;
 public class SubjectConverterImplTest {
 
 	private SubjectDao daoToBeConverted;
-	private SubjectConverterImpl converter;
+	private SubjectConverter converter;
 
 	@Before
 	public void setUp() {
@@ -34,5 +34,12 @@ public class SubjectConverterImplTest {
 		Subject modelConverted = converter.toModel(daoToBeConverted);
 		
 		assertThat(modelConverted.getName()).isEqualTo("a-name");
+	}
+	
+	@Test
+	public void shouldBeANullSubjectWhenConvertingToModelANullDao() {
+		Subject modelConverted = converter.toModel(null);
+		
+		assertThat(modelConverted).isEqualTo(Subject.Null());
 	}
 }
