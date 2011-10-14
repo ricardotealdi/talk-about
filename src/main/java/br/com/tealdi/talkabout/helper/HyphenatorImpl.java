@@ -2,6 +2,9 @@ package br.com.tealdi.talkabout.helper;
 
 import java.text.Normalizer;
 
+import br.com.caelum.vraptor.ioc.Component;
+
+@Component
 public class HyphenatorImpl implements Hyphenator {
 
 	public String hyphenizeIt(String text) {
