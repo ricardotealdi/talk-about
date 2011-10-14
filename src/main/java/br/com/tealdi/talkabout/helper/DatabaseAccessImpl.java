@@ -1,0 +1,31 @@
+package br.com.tealdi.talkabout.helper;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import br.com.caelum.vraptor.ioc.Component;
+import br.com.tealdi.talkabout.dao.Subject;
+
+@Component
+public class DatabaseAccessImpl implements DatabaseAccess {
+
+	private static SessionFactory sessionFactory;
+
+	public Session getSession() {
+		return getSessionFactory().openSession();
+	}
+	
+	private SessionFactory getSessionFactory() {
+		return sessionFactory == null
+				? sessionFactory = createSessionFactory()
+				: sessionFactory;
+	}
+
+	private SessionFactory createSessionFactory() {
+		return new Configuration()
+    				.addAnnotatedClass(Subject.class)
+                    .configure()
+                    .buildSessionFactory();
+	}
+}
