@@ -4,6 +4,7 @@ Servers
 temp
 reports
 TEST-*
+WebContent/WEB-INF/classes*
 .metadata
 *~
 *.lock
@@ -14,3 +15,5 @@ TEST-*
 *.iml
 *.ipr
 *.iws
+classes
+*.class
