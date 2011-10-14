@@ -4,7 +4,8 @@
 <wb-resource deploy-path="/" source-path="/WebContent"/>
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/unit"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/integration"/>
 <property name="context-root" value="talk-about"/>
 <property name="java-output-path"/>
 </wb-module>
