@@ -1,7 +1,7 @@
 package br.com.tealdi.talkabout;
 
-import br.com.tealdi.talkabout.helper.DatabaseAccess;
-import br.com.tealdi.talkabout.helper.DatabaseAccessImpl;
+import br.com.tealdi.talkabout.data.DatabaseAccess;
+import br.com.tealdi.talkabout.data.DatabaseAccessImpl;
 
 public abstract class DatabaseDependentTest {
 

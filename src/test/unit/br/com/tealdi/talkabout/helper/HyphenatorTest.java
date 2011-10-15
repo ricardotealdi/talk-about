@@ -49,7 +49,7 @@ public class HyphenatorTest {
     
     @Test
     public void shouldConvertAccentedCharactersIntoNormalOnesWhenHyphenating() {
-    	assertThat(hyphenator.hyphenizeIt("á-ãçcèñTéd-TÉxT"))
+    	assertThat(hyphenator.hyphenizeIt("Ã¡-Ã£Ã§cÃ¨Ã±TÃ©d-TÃ‰xT"))
     		.isEqualTo("a-accented-text");
     }
 }

@@ -7,8 +7,8 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.tealdi.talkabout.converter.SubjectConverter;
-import br.com.tealdi.talkabout.dao.SubjectDao;
-import br.com.tealdi.talkabout.helper.DatabaseAccess;
+import br.com.tealdi.talkabout.data.DatabaseAccess;
+import br.com.tealdi.talkabout.data.resource.SubjectDao;
 import br.com.tealdi.talkabout.model.Subject;
 
 @Component
@@ -42,5 +42,17 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 			.list();
 		
 		return rowsFound.isEmpty() ? null : rowsFound.get(0);
+	}
+
+	public void save(Subject subjectToSave) {
+		Session session = databaseAccess.getSession();
+
+		session.beginTransaction();
+		SubjectDao dao = subjectConverter.toDao(subjectToSave);
+		session.saveOrUpdate(dao);
+		session.getTransaction().commit();
+		session.close();
+		
+		subjectToSave.setId(dao.getId());
 	}
 }
