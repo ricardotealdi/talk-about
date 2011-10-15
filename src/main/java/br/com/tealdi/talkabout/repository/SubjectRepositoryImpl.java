@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.tealdi.talkabout.converter.SubjectConverter;
 import br.com.tealdi.talkabout.data.DatabaseAccess;
-import br.com.tealdi.talkabout.data.resource.SubjectDao;
+import br.com.tealdi.talkabout.data.resource.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
 
 @Component
@@ -27,7 +27,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 	public Subject findBy(String name) {
 		Session session = databaseAccess.getSession();
 		
-		SubjectDao subjectsFound = findByName(name, session);
+		SubjectDTO subjectsFound = findByName(name, session);
 		
 		session.close();
 		
@@ -35,9 +35,9 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	private SubjectDao findByName(String name, Session session) {
-		List<SubjectDao> rowsFound = (List<SubjectDao>) session
-			.createCriteria(SubjectDao.class)
+	private SubjectDTO findByName(String name, Session session) {
+		List<SubjectDTO> rowsFound = (List<SubjectDTO>) session
+			.createCriteria(SubjectDTO.class)
 			.add(Restrictions.eq("name", name))
 			.list();
 		
@@ -48,7 +48,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		Session session = databaseAccess.getSession();
 
 		session.beginTransaction();
-		SubjectDao dao = subjectConverter.toDao(subjectToSave);
+		SubjectDTO dao = subjectConverter.toDao(subjectToSave);
 		session.saveOrUpdate(dao);
 		session.getTransaction().commit();
 		session.close();

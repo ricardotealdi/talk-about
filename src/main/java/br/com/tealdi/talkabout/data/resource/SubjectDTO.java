@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Subjects")
-public class SubjectDao {
+public class SubjectDTO {
 
 	private int id;
 	private String name;

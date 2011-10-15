@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import br.com.tealdi.talkabout.DatabaseDependentTest;
 import br.com.tealdi.talkabout.converter.SubjectConverterImpl;
-import br.com.tealdi.talkabout.data.resource.SubjectDao;
+import br.com.tealdi.talkabout.data.resource.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -43,19 +43,19 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 		
 		repository.save(subjectToSave);
 		
-		SubjectDao rowFound = getFromDatabase(subjectToSave.getId());
+		SubjectDTO rowFound = getFromDatabase(subjectToSave.getId());
 		
 		assertThat(rowFound.getId()).isEqualTo(rowFound.getId());
 		assertThat(rowFound.getName()).isEqualTo(rowFound.getName());
 	}
 
 	private void givenThereIsOneSubjectOnDatabase() {
-		SubjectDao subjectToBeAdded = createSubject(1, "a-subject");
+		SubjectDTO subjectToBeAdded = createSubject(1, "a-subject");
 		
 		persistIt(subjectToBeAdded);
 	}
 
-	private void persistIt(SubjectDao subjectToBeAdded) {
+	private void persistIt(SubjectDTO subjectToBeAdded) {
 		Session session = getDatabaseAccess().getSession();
 		session.beginTransaction();
 		session.save(subjectToBeAdded);
@@ -63,15 +63,15 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 		session.close();
 	}
 	
-	private SubjectDao getFromDatabase(int id) {
+	private SubjectDTO getFromDatabase(int id) {
 		Session session = getDatabaseAccess().getSession();
-		SubjectDao rowFound =  (SubjectDao) session.get(SubjectDao.class, id);
+		SubjectDTO rowFound =  (SubjectDTO) session.get(SubjectDTO.class, id);
 		session.close();
 		return rowFound;
 	}
 
-	private SubjectDao createSubject(int id, String subject) {
-		SubjectDao subjectToBeAdded = new SubjectDao();
+	private SubjectDTO createSubject(int id, String subject) {
+		SubjectDTO subjectToBeAdded = new SubjectDTO();
 		subjectToBeAdded.setId(id);
 		subjectToBeAdded.setName(subject);
 		return subjectToBeAdded;
