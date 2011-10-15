@@ -34,16 +34,6 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		return subjectConverter.toModel(subjectsFound);
 	}
 
-	@SuppressWarnings("unchecked")
-	private SubjectDTO findByName(String name, Session session) {
-		List<SubjectDTO> rowsFound = (List<SubjectDTO>) session
-			.createCriteria(SubjectDTO.class)
-			.add(Restrictions.eq("name", name))
-			.list();
-		
-		return rowsFound.isEmpty() ? null : rowsFound.get(0);
-	}
-
 	public void save(Subject subjectToSave) {
 		Session session = databaseAccess.getSession();
 
@@ -54,5 +44,15 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		session.close();
 		
 		subjectToSave.setId(dao.getId());
+	}
+
+	@SuppressWarnings("unchecked")
+	private SubjectDTO findByName(String name, Session session) {
+		List<SubjectDTO> rowsFound = (List<SubjectDTO>) session
+			.createCriteria(SubjectDTO.class)
+			.add(Restrictions.eq("name", name))
+			.list();
+		
+		return rowsFound.isEmpty() ? null : rowsFound.get(0);
 	}
 }
