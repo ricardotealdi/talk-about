@@ -5,6 +5,8 @@
 <title>VRaptor Blank Project</title>
 </head>
 <body>
+	<h1>${subject.id} ${subject.name}</h1>
 	It works!! ${variable}
+	<h2>${text}</h2>
 </body>
 </html>
