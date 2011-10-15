@@ -5,7 +5,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.tealdi.talkabout.data.resource.SubjectDTO;
+import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
 
 public class SubjectConverterImplTest {

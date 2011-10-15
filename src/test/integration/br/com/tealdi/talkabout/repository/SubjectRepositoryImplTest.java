@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import br.com.tealdi.talkabout.DatabaseDependentTest;
 import br.com.tealdi.talkabout.converter.SubjectConverterImpl;
-import br.com.tealdi.talkabout.data.resource.SubjectDTO;
+import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
 
 import static org.fest.assertions.Assertions.assertThat;

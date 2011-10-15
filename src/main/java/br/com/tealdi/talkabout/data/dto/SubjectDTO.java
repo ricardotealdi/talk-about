@@ -1,4 +1,4 @@
-package br.com.tealdi.talkabout.data.resource;
+package br.com.tealdi.talkabout.data.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.tealdi.talkabout.converter.SubjectConverter;
 import br.com.tealdi.talkabout.data.DatabaseAccess;
-import br.com.tealdi.talkabout.data.resource.SubjectDTO;
+import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
 
 @Component

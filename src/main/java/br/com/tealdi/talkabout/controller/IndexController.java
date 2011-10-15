@@ -3,7 +3,7 @@ package br.com.tealdi.talkabout.controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.tealdi.talkabout.data.resource.SubjectDTO;
+import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 import br.com.tealdi.talkabout.helper.Hyphenator;
 import br.com.tealdi.talkabout.model.Subject;
 import br.com.tealdi.talkabout.repository.SubjectRepository;

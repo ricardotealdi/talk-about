@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import br.com.caelum.vraptor.ioc.Component;
-import br.com.tealdi.talkabout.data.resource.SubjectDTO;
+import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 
 @Component
 public class DatabaseAccessImpl implements DatabaseAccess {
