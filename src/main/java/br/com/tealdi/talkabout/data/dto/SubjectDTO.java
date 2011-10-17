@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Subjects")
+@Table(name = "SUBJECTS")
 public class SubjectDTO {
 
 	private int id;
@@ -27,7 +27,7 @@ public class SubjectDTO {
 		this.name = name;
 	}
 	
-	@Column(name = "name")
+	@Column(name = "name", unique = true, nullable = false)
 	public String getName() {
 		return name;
 	}
