@@ -14,6 +14,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 
 	private SubjectRepository repository;
+	private SubjectDTO aSubjectDto;
 
 	@Before
 	public void setUp() {
@@ -26,7 +27,7 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 		
 		Subject subjectFound = repository.findBy("a-subject");
 		
-		assertThat(subjectFound.getId()).isEqualTo(1);
+		assertThat(subjectFound.getId()).isEqualTo(aSubjectDto.getId());
 		assertThat(subjectFound.getName()).isEqualTo("a-subject");
 	}
 	
@@ -50,9 +51,9 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 	}
 
 	private void givenThereIsOneSubjectOnDatabase() {
-		SubjectDTO subjectToBeAdded = createSubject(1, "a-subject");
+		aSubjectDto = createSubject(1, "a-subject");
 		
-		persistIt(subjectToBeAdded);
+		persistIt(aSubjectDto);
 	}
 
 	private void persistIt(SubjectDTO subjectToBeAdded) {

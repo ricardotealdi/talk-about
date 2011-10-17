@@ -2,10 +2,12 @@ package br.com.tealdi.talkabout.repository;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.envers.reader.FirstLevelCache;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +50,22 @@ public class SubjectCommentRepositoryImplTest extends DatabaseDependentTest {
 		List<SubjectComment> commentsFound = repository.findFor(subject);
 		
 		assertThat(commentsFound).hasSize(2);
+		
+		assertThis(commentsFound.get(0), firstCommentDto);
+		assertThis(commentsFound.get(1), secondCommentDto);
+	}
+	
+	private void assertThis(SubjectComment comment, SubjectCommentDTO commentDto) {
+		assertThat(comment.getId()).isEqualTo(commentDto.getId());
+		assertThat(comment.getComment()).isEqualTo(commentDto.getComment());
+		assertThat(comment.getCommentersEmail()).isEqualTo(commentDto.getCommentersEmail());
+		assertThat(comment.getSubjectId()).isEqualTo(commentDto.getSubjectId());
+		assertThat(dateAsString(comment.getCreatedAt()))
+				.isEqualTo(dateAsString(commentDto.getCreatedAt()));
+	}
+	
+	private String dateAsString(Date date) {
+		return new SimpleDateFormat("yyyyMMdd hh:mm:ss").format(date);
 	}
 
 	private void andFourComments() {		
