@@ -5,6 +5,6 @@ import br.com.tealdi.talkabout.model.Subject;
 
 public interface SubjectConverter {
 
-	public abstract Subject toModel(SubjectDTO dao);
-	public abstract SubjectDTO toDao(Subject dao);
+	public abstract Subject toModel(SubjectDTO dto);
+	public abstract SubjectDTO toDto(Subject model);
 }

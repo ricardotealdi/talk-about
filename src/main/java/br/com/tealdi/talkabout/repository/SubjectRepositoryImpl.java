@@ -38,7 +38,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		Session session = databaseAccess.getSession();
 
 		session.beginTransaction();
-		SubjectDTO dao = subjectConverter.toDao(subjectToSave);
+		SubjectDTO dao = subjectConverter.toDto(subjectToSave);
 		session.saveOrUpdate(dao);
 		session.getTransaction().commit();
 		session.close();

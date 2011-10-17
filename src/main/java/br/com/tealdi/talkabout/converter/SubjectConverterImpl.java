@@ -7,13 +7,13 @@ import br.com.tealdi.talkabout.model.Subject;
 @Component
 public class SubjectConverterImpl implements SubjectConverter {
 
-	public Subject toModel(SubjectDTO dao) {
-		return dao != null
-			? convertToModel(dao)
+	public Subject toModel(SubjectDTO dto) {
+		return dto != null
+			? convertToModel(dto)
 			: Subject.Null();
 	}
 	
-	public SubjectDTO toDao(Subject model) {
+	public SubjectDTO toDto(Subject model) {
 		SubjectDTO daoSubject = new SubjectDTO();
 		daoSubject.setId(model.getId());
 		daoSubject.setName(model.getName());

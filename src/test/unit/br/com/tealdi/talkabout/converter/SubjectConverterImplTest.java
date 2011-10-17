@@ -10,15 +10,15 @@ import br.com.tealdi.talkabout.model.Subject;
 
 public class SubjectConverterImplTest {
 
-	private SubjectDTO daoToBeConverted;
+	private SubjectDTO dtoToBeConverted;
 	private SubjectConverter converter;
 	private Subject modelToBeConverted;
 
 	@Before
 	public void setUp() {
-		daoToBeConverted = new SubjectDTO();
-		daoToBeConverted.setId(1);
-		daoToBeConverted.setName("a-name");
+		dtoToBeConverted = new SubjectDTO();
+		dtoToBeConverted.setId(1);
+		dtoToBeConverted.setName("a-name");
 		
 		modelToBeConverted = new Subject("a-model");
 		modelToBeConverted.setId(2);
@@ -28,14 +28,14 @@ public class SubjectConverterImplTest {
 	
 	@Test
 	public void shouldSetIdWhenConvertingToModel() {		
-		Subject modelConverted = converter.toModel(daoToBeConverted);
+		Subject modelConverted = converter.toModel(dtoToBeConverted);
 		
 		assertThat(modelConverted.getId()).isEqualTo(1);
 	}
 	
 	@Test
 	public void shouldSetNameWhenConvertingToModel() {
-		Subject modelConverted = converter.toModel(daoToBeConverted);
+		Subject modelConverted = converter.toModel(dtoToBeConverted);
 		
 		assertThat(modelConverted.getName()).isEqualTo("a-name");
 	}
@@ -48,16 +48,16 @@ public class SubjectConverterImplTest {
 	}
 	
 	@Test
-	public void shouldSetIdWhenConvertingToDao() {
-		SubjectDTO daoConverted = converter.toDao(modelToBeConverted);
+	public void shouldSetIdWhenConvertingToDto() {
+		SubjectDTO dtoConverted = converter.toDto(modelToBeConverted);
 		
-		assertThat(daoConverted.getId()).isEqualTo(modelToBeConverted.getId());
+		assertThat(dtoConverted.getId()).isEqualTo(modelToBeConverted.getId());
 	}
 	
 	@Test
 	public void shouldSetNameWhenConvertingToDao() {
-		SubjectDTO daoConverted = converter.toDao(modelToBeConverted);
+		SubjectDTO dtoConverted = converter.toDto(modelToBeConverted);
 		
-		assertThat(daoConverted.getName()).isEqualTo(modelToBeConverted.getName());
+		assertThat(dtoConverted.getName()).isEqualTo(modelToBeConverted.getName());
 	}
 }
