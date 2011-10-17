@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import br.com.caelum.vraptor.ioc.Component;
+import br.com.tealdi.talkabout.data.dto.SubjectCommentDTO;
 import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 
 @Component
@@ -25,6 +26,7 @@ public class DatabaseAccessImpl implements DatabaseAccess {
 	private SessionFactory createSessionFactory() {
 		return new Configuration()
     				.addAnnotatedClass(SubjectDTO.class)
+    				.addAnnotatedClass(SubjectCommentDTO.class)
                     .configure()
                     .buildSessionFactory();
 	}
