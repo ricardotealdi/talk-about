@@ -6,12 +6,14 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.caelum.vraptor.ioc.Component;
 import br.com.tealdi.talkabout.converter.SubjectCommentConverter;
 import br.com.tealdi.talkabout.data.DatabaseAccess;
 import br.com.tealdi.talkabout.data.dto.SubjectCommentDTO;
 import br.com.tealdi.talkabout.model.Subject;
 import br.com.tealdi.talkabout.model.SubjectComment;
 
+@Component
 public class SubjectCommentRepositoryImpl implements SubjectCommentRepository {
 
 	private final DatabaseAccess databaseAccess;
