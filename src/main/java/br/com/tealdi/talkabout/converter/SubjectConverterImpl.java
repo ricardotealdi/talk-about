@@ -1,12 +1,22 @@
 package br.com.tealdi.talkabout.converter;
 
+import java.util.List;
+
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
+import br.com.tealdi.talkabout.model.SubjectComment;
+import br.com.tealdi.talkabout.viewmodel.SubjectViewModel;
 
 @Component
 public class SubjectConverterImpl implements SubjectConverter {
 
+	private final SubjectCommentConverter commentConverter;
+
+	public SubjectConverterImpl(SubjectCommentConverter commentConverter) {
+		this.commentConverter = commentConverter;
+	}
+	
 	public Subject toModel(SubjectDTO dto) {
 		return dto != null
 			? convertToModel(dto)
@@ -26,5 +36,18 @@ public class SubjectConverterImpl implements SubjectConverter {
 		modelSubject.setId(dao.getId());
 		
 		return modelSubject;
+	}
+
+	public SubjectViewModel toViewModel(
+			Subject model,
+			List<SubjectComment> comments) {
+		SubjectViewModel viewModel = new SubjectViewModel();
+		
+		viewModel.setId(model.getId());
+		viewModel.setName(model.getName());
+		
+		viewModel.setComments(commentConverter.toViewModel(comments));
+		
+		return viewModel;
 	}
 }

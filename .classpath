@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="src/test/lib/fest-assert-1.4.jar"/>
 	<classpathentry kind="lib" path="src/test/lib/fest-util-1.1.6.jar"/>
 	<classpathentry kind="lib" path="src/test/lib/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="src/test/lib/mockito-all-1.8.5.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

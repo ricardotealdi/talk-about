@@ -1,18 +1,28 @@
 package br.com.tealdi.talkabout.converter;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
+import br.com.tealdi.talkabout.model.SubjectComment;
+import br.com.tealdi.talkabout.viewmodel.SubjectCommentViewModel;
 
 public class SubjectConverterImplTest {
 
 	private SubjectDTO dtoToBeConverted;
 	private SubjectConverter converter;
 	private Subject modelToBeConverted;
+	private SubjectCommentConverter mockedCommentConverter;
+	private List<SubjectCommentViewModel> convertedViewModelComments;
+	private List<SubjectComment> comments;
 
 	@Before
 	public void setUp() {
@@ -23,7 +33,21 @@ public class SubjectConverterImplTest {
 		modelToBeConverted = new Subject("a-model");
 		modelToBeConverted.setId(2);
 		
-		converter = new SubjectConverterImpl();
+		setUpCommentConverter();
+		
+		converter = new SubjectConverterImpl(mockedCommentConverter);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void setUpCommentConverter() {
+		comments = new ArrayList<SubjectComment>(); 
+		
+		mockedCommentConverter = mock(SubjectCommentConverter.class);
+		
+		convertedViewModelComments = new ArrayList<SubjectCommentViewModel>();
+		
+		when(mockedCommentConverter.toViewModel(isA(List.class)))
+			.thenReturn(convertedViewModelComments);
 	}
 	
 	@Test
@@ -59,5 +83,23 @@ public class SubjectConverterImplTest {
 		SubjectDTO dtoConverted = converter.toDto(modelToBeConverted);
 		
 		assertThat(dtoConverted.getName()).isEqualTo(modelToBeConverted.getName());
+	}
+	
+	@Test
+	public void shouldSetIdWhenConvertingToViewModel() {
+		assertThat(converter.toViewModel(modelToBeConverted, comments).getId())
+				.isEqualTo(modelToBeConverted.getId());
+	}
+	
+	@Test
+	public void shouldSetNameWhenConvertingToViewModel() {
+		assertThat(converter.toViewModel(modelToBeConverted, comments).getName())
+				.isEqualTo(modelToBeConverted.getName());
+	}
+	
+	@Test
+	public void shouldSetCommentsWhenConvertingToViewModel() {
+		assertThat(converter.toViewModel(modelToBeConverted, comments).getComments())
+				.isEqualTo(convertedViewModelComments);
 	}
 }

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.tealdi.talkabout.DatabaseDependentTest;
+import br.com.tealdi.talkabout.converter.SubjectCommentConverterImpl;
 import br.com.tealdi.talkabout.converter.SubjectConverterImpl;
 import br.com.tealdi.talkabout.data.dto.SubjectDTO;
 import br.com.tealdi.talkabout.model.Subject;
@@ -18,7 +19,7 @@ public class SubjectRepositoryImplTest extends DatabaseDependentTest {
 
 	@Before
 	public void setUp() {
-		repository = new SubjectRepositoryImpl(getDatabaseAccess(), new SubjectConverterImpl()); 
+		repository = new SubjectRepositoryImpl(getDatabaseAccess(), new SubjectConverterImpl(new  SubjectCommentConverterImpl())); 
 	}
 	
 	@Test
