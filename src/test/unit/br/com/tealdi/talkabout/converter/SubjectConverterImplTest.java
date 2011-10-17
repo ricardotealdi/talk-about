@@ -1,8 +1,9 @@
 package br.com.tealdi.talkabout.converter;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
