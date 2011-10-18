@@ -3,8 +3,7 @@
 <layout:page title="I want to talk about..." description="Give your opinion about anything you want">
     <jsp:body>
     	<form action="" method="POST">
-        	<span>I want to talk about </span>
-        	<input type="text" name="subject" />
+        	<label>I want to talk about <input type="text" name="subject" /></label>
         	<input type="submit" value="let's talk" />
         </form>
     </jsp:body>
