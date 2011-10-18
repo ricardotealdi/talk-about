@@ -39,15 +39,6 @@ public class SubjectCommentConverterImpl implements SubjectCommentConverter {
 		
 		return commentsViewModel;
 	}
-	
-	private SubjectCommentViewModel toViewModel(SubjectComment comment) {
-		SubjectCommentViewModel commentViewModel = new SubjectCommentViewModel();
-		
-		commentViewModel.setComment(comment.getComment());
-		commentViewModel.setCommentersEmail(comment.getCommentersEmail());
-		
-		return commentViewModel;
-	}
 
 	public SubjectComment toModel(SubjectCommentViewModel commentViewModel, int subjectId) {
 		SubjectComment model = 
@@ -58,5 +49,23 @@ public class SubjectCommentConverterImpl implements SubjectCommentConverter {
 					new Date());
 		
 		return model;
+	}
+
+	public SubjectCommentDTO toDto(SubjectComment model) {
+		SubjectCommentDTO row = new SubjectCommentDTO();
+		row.setComment(model.getComment());
+		row.setCommentersEmail(model.getCommentersEmail());
+		row.setSubjectId(model.getSubjectId());
+		
+		return row;
+	}
+	
+	private SubjectCommentViewModel toViewModel(SubjectComment comment) {
+		SubjectCommentViewModel commentViewModel = new SubjectCommentViewModel();
+		
+		commentViewModel.setComment(comment.getComment());
+		commentViewModel.setCommentersEmail(comment.getCommentersEmail());
+		
+		return commentViewModel;
 	}
 }

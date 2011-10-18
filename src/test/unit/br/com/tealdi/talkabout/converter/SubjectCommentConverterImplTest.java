@@ -124,6 +124,24 @@ public class SubjectCommentConverterImplTest {
 			.isEqualTo(1);
 	}
 	
+	@Test
+	public void shouldConvertCommentWhenConvertingToDto() {
+		assertThat(converter.toDto(firstModelComment).getComment())
+			.isEqualTo(firstModelComment.getComment());
+	}
+	
+	@Test
+	public void shouldConvertCommentersEmailWhenConvertingToDto() {
+		assertThat(converter.toDto(firstModelComment).getCommentersEmail())
+			.isEqualTo(firstModelComment.getCommentersEmail());
+	}
+	
+	@Test
+	public void shouldConvertSubjectIdWhenConvertingToDto() {
+		assertThat(converter.toDto(firstModelComment).getSubjectId())
+			.isEqualTo(firstModelComment.getSubjectId());
+	}
+	
 	private void createComments() {
 		firstModelComment = new SubjectComment(
 				"first-comment", 

@@ -8,6 +8,7 @@ import br.com.tealdi.talkabout.viewmodel.SubjectCommentViewModel;
 
 public interface SubjectCommentConverter {
 	public abstract SubjectComment toModel(SubjectCommentDTO dto);
+	public abstract SubjectCommentDTO toDto(SubjectComment model);
 	public abstract SubjectComment toModel(SubjectCommentViewModel commentViewModel, int subjectId);
 	public abstract List<SubjectCommentViewModel> toViewModel(List<SubjectComment> comments);
 }
