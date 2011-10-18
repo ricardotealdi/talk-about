@@ -23,3 +23,18 @@ body {
 hr {
 	border-bottom: 1px solid #DDD;
 }
+form.center {
+	width: 400px;
+	margin: auto;	
+}
+input.btn.home {
+	height: 49px;	
+}
+input.span5.home {
+	height: 46px;
+	font-size: 25px;
+	padding-top: 1px;	
+	padding-bottom: 1px;
+	vertical-align: top;
+	color: #0064CD;
+}

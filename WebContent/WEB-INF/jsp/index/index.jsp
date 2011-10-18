@@ -6,9 +6,9 @@
 		<div class="page-header">
 			<h1>Give your opinion about anything you want</h1>
 		</div>
-    	<form action="${linkTo[IndexController].redirectToSubject}" method="POST">
-        	<input type="text" size="30" maxlength="30" name="subject" placeholder="I want to talk about ..." />
-        	<input type="submit" class="btn primary" value="start" />
+    	<form class="center" action="${linkTo[IndexController].redirectToSubject}" method="POST">
+        	<input type="text" class="span5 home" size="30" maxlength="30" name="subject" placeholder="I want to talk about ..." />
+        	<input type="submit" class="btn home primary" value="start" />
         </form>
     </jsp:body>
 </layout:page>
