@@ -7,4 +7,5 @@ import br.com.tealdi.talkabout.model.SubjectComment;
 
 public interface SubjectCommentRepository {
 	public List<SubjectComment> findFor(Subject subject);
+	public void save(SubjectComment comment);
 }

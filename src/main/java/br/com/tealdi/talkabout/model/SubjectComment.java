@@ -12,16 +12,15 @@ public class SubjectComment {
 	public SubjectComment(
 			String comment, 
 			String commentersEmail,			
-			int subjectId, 
-			Date createdAt) {
+			int subjectId) {
 		this.comment = comment;
 		this.commentersEmail = commentersEmail;
 		this.subjectId = subjectId;
-		this.createdAt = createdAt;
+		this.createdAt = new Date();
 	}
 	
 	private static final SubjectComment nullSubjectComment = 
-			new SubjectComment("", "", 0, new Date());
+			new SubjectComment("", "", 0);
 	
 	public static SubjectComment Null() {
 		return nullSubjectComment;

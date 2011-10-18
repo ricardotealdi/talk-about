@@ -1,6 +1,7 @@
 package br.com.tealdi.talkabout.repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -38,6 +39,21 @@ public class SubjectCommentRepositoryImpl implements SubjectCommentRepository {
 		return commentsFound.size() > 0
 				? convertToModel(commentsFound)
 				: new ArrayList<SubjectComment>();
+	}
+	
+	public void save(SubjectComment comment) {
+		Session session = databaseAccess.getSession();
+		SubjectCommentDTO row = converter.toDto(comment);
+		
+		row.setCreatedAt(new Date());
+		
+		session.beginTransaction();
+		session.saveOrUpdate(row);
+		session.getTransaction().commit();
+		session.close();
+		
+		comment.setId(row.getId());
+		comment.setCreatedAt(row.getCreatedAt());
 	}
 
 	private List<SubjectComment> convertToModel(List<SubjectCommentDTO> commentsFound) {

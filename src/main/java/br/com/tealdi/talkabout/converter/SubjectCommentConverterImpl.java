@@ -1,7 +1,6 @@
 package br.com.tealdi.talkabout.converter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import br.com.caelum.vraptor.ioc.Component;
@@ -23,9 +22,9 @@ public class SubjectCommentConverterImpl implements SubjectCommentConverter {
 				new SubjectComment(
 						dto.getComment(), 
 						dto.getCommentersEmail(), 
-						dto.getSubjectId(), 
-						dto.getCreatedAt());
+						dto.getSubjectId());
 		model.setId(dto.getId());
+		model.setCreatedAt(dto.getCreatedAt());
 		
 		return model;
 	}
@@ -45,8 +44,7 @@ public class SubjectCommentConverterImpl implements SubjectCommentConverter {
 			new SubjectComment(
 					commentViewModel.getComment(), 
 					commentViewModel.getCommentersEmail(), 
-					subjectId,
-					new Date());
+					subjectId);
 		
 		return model;
 	}

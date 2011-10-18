@@ -146,14 +146,12 @@ public class SubjectCommentConverterImplTest {
 		firstModelComment = new SubjectComment(
 				"first-comment", 
 				"first-email", 
-				1, 
-				new Date());
+				1);
 		
 		secondModelComment = new SubjectComment(
 				"second-comment", 
 				"second-email", 
-				2, 
-				new Date());
+				2);
 		
 		twoModelComments = new ArrayList<SubjectComment>();
 		twoModelComments.add(firstModelComment);

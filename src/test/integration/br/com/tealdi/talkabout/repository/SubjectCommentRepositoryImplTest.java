@@ -35,6 +35,10 @@ public class SubjectCommentRepositoryImplTest extends DatabaseDependentTest {
 	
 	@After
 	public void tearDown() {
+		session.beginTransaction();
+		session.createQuery("DELETE FROM SubjectCommentDTO").executeUpdate();
+		session.createQuery("DELETE FROM SubjectDTO").executeUpdate();
+		session.getTransaction().commit();
 		session.close();
 	}
 	
@@ -52,6 +56,26 @@ public class SubjectCommentRepositoryImplTest extends DatabaseDependentTest {
 		
 		assertThis(commentsFound.get(0), firstCommentDto);
 		assertThis(commentsFound.get(1), secondCommentDto);
+	}
+	
+	@Test
+	public void shouldSaveANewComent() {
+		givenThereAreTwoSubjectOnDatabase();
+		
+		SubjectComment comment = 
+				new SubjectComment("comment", "email", aSubject.getId());
+		
+		repository.save(comment);
+		
+		assertThis(comment, getFromDatabase(comment.getId()));
+	}
+	
+	private SubjectCommentDTO getFromDatabase(int id) {
+		Session session = getDatabaseAccess().getSession();
+		SubjectCommentDTO rowFound =  (SubjectCommentDTO) session.get(SubjectCommentDTO.class, id);
+		session.close();
+		
+		return rowFound;
 	}
 	
 	private void assertThis(SubjectComment comment, SubjectCommentDTO commentDto) {
