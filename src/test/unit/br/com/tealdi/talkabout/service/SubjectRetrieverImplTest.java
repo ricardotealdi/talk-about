@@ -7,24 +7,31 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.tealdi.talkabout.factory.SubjectFactory;
+import br.com.tealdi.talkabout.helper.Hyphenator;
 import br.com.tealdi.talkabout.model.Subject;
 import br.com.tealdi.talkabout.repository.SubjectRepository;
 
 public class SubjectRetrieverImplTest {
 
+	private static final String SUBJECT_NAME_HYPHENIZED = "subject-name-hyphenized";
 	private SubjectRetriever retriever;
 	private SubjectRepository mockedRepository;
 	private SubjectFactory mockedFactory;
 	private final String SUBJECT_NAME = "subject-name";
 	private Subject subjectFound;
 	private Subject subjectCreated;
+	private Hyphenator mockedHyphenator;
 
 	@Before
 	public void setUp() {
+		mockedHyphenator = mock(Hyphenator.class);
+		when(mockedHyphenator.hyphenizeIt(anyString()))
+			.thenReturn(SUBJECT_NAME_HYPHENIZED);
+		
 		mockedRepository = mock(SubjectRepository.class);
 		mockedFactory = mock(SubjectFactory.class);
 		
-		retriever = new SubjectRetrieverImpl(mockedRepository, mockedFactory);
+		retriever = new SubjectRetrieverImpl(mockedHyphenator, mockedRepository, mockedFactory);
 	}
 	
 	@Test
@@ -35,13 +42,23 @@ public class SubjectRetrieverImplTest {
 	}
 	
 	@Test
+	public void shouldHyphenizeTextWhenRetrievingWithName() {
+		givenSubjectWasFound();
+		
+		retriever.with(SUBJECT_NAME);
+		
+		verify(mockedHyphenator, times(1))
+			.hyphenizeIt(SUBJECT_NAME);
+	}
+	
+	@Test
 	public void shouldGetSubjectFromRepositoryWhenRetrievingWithName() {
 		givenSubjectWasFound();
 		
 		retriever.with(SUBJECT_NAME);
 		
 		verify(mockedRepository, times(1))
-			.findBy(SUBJECT_NAME);
+			.findBy(SUBJECT_NAME_HYPHENIZED);
 	}
 	
 	@Test
@@ -60,7 +77,7 @@ public class SubjectRetrieverImplTest {
 		retriever.with(SUBJECT_NAME);
 		
 		verify(mockedRepository, times(1))
-			.findBy(SUBJECT_NAME);
+			.findBy(SUBJECT_NAME_HYPHENIZED);
 	}
 	
 	@Test
@@ -71,7 +88,7 @@ public class SubjectRetrieverImplTest {
 		retriever.with(SUBJECT_NAME);
 		
 		verify(mockedFactory, times(1))
-			.create(SUBJECT_NAME);
+			.create(SUBJECT_NAME_HYPHENIZED);
 	}
 	
 	@Test
@@ -83,6 +100,17 @@ public class SubjectRetrieverImplTest {
 		
 		verify(mockedRepository, times(1))
 			.save(subjectCreated);
+	}
+	
+	@Test
+	public void shouldHyphenizeTextWhenRetrievingWithNameForANotFoundSubject() {
+		givenSubjectWasNotFound()
+			.andNewSubjectWasCreated();
+		
+		retriever.with(SUBJECT_NAME);
+		
+		verify(mockedHyphenator, times(1))
+			.hyphenizeIt(SUBJECT_NAME);
 	}
 
 	private SubjectRetrieverImplTest andNewSubjectWasCreated() {
