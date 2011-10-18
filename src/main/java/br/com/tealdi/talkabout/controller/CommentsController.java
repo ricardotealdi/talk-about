@@ -26,8 +26,15 @@ public class CommentsController {
 	
 	@Post("/comments/save")
 	public void save(SubjectCommentViewModel comment, SubjectViewModel subject) {
-		repository.save(converter.toModel(comment, subject.getId()));
+		if(isNotEmpty(comment)) {
+			repository.save(converter.toModel(comment, subject.getId()));
+		}
 		
 		result.redirectTo(SubjectsController.class).byName(subject.getName());
+	}
+
+	private boolean isNotEmpty(SubjectCommentViewModel comment) {
+		return !comment.getComment().trim().isEmpty() 
+			&& !comment.getCommentersEmail().trim().isEmpty() ;
 	}
 }

@@ -19,13 +19,19 @@ public class CommentsControllerTest {
 	private SubjectCommentConverter mockedSubjectCommentConverter;
 	private SubjectCommentRepository mockedSubjectCommentRepository;
 	private SubjectCommentViewModel aComment;
+	private SubjectCommentViewModel aEmptyComment;
 	private SubjectViewModel aSubject;
 	private SubjectComment convertedModel;
 	private SubjectsController mockedSubjectsController;
 
 	@Before
 	public void setUp() {
+		aEmptyComment = new SubjectCommentViewModel();
+		
 		aComment = new SubjectCommentViewModel();
+		aComment.setComment("comment");
+		aComment.setCommentersEmail("commentersEmail");
+		
 		aSubject = new SubjectViewModel();
 		aSubject.setId(42);
 		
@@ -63,6 +69,22 @@ public class CommentsControllerTest {
 		controller.save(aComment, aSubject);
 		
 		verify(mockedSubjectCommentRepository, times(1))
+			.save(convertedModel);
+	}
+	
+	@Test
+	public void shouldNotConvertToModelWhenReceiveAnEmptyComment() {
+		controller.save(aEmptyComment, aSubject);
+		
+		verify(mockedSubjectCommentConverter, times(0))
+			.toModel(aComment, aSubject.getId());
+	}
+	
+	@Test
+	public void shouldNotSaveCommentWhenReceiveAnEmptyComment() {
+		controller.save(aEmptyComment, aSubject);
+		
+		verify(mockedSubjectCommentRepository, times(0))
 			.save(convertedModel);
 	}
 	
