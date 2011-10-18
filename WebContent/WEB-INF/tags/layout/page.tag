@@ -6,8 +6,9 @@
 %>
 <html>
 	<head>
-		<meta name="description" content="${description}" />
 		<title>${title}</title>
+		<meta name="description" content="${description}" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="<c:url value="/public/style/bootstrap.min.css" />" />
 		<link rel="stylesheet" href="<c:url value="/public/style/style.css" />" />
 	</head>
