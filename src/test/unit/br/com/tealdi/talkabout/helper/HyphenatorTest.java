@@ -1,4 +1,4 @@
-package br.com.tealdi.talkabout.helper;
+Ôªøpackage br.com.tealdi.talkabout.helper;
 
 import br.com.tealdi.talkabout.helper.HyphenatorImpl;
 import br.com.tealdi.talkabout.helper.Hyphenator;
@@ -49,7 +49,7 @@ public class HyphenatorTest {
     
     @Test
     public void shouldConvertAccentedCharactersIntoNormalOnesWhenHyphenating() {
-    	assertThat(hyphenator.hyphenizeIt("·-„ÁceÒTÈd-TÀxT"))
+    	assertThat(hyphenator.hyphenizeIt("√°-√£√ßc√©√±T√©d-T√âxT"))
     		.isEqualTo("a-accented-text");
     }
 }
