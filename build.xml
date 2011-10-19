@@ -5,7 +5,6 @@
 
 	<path id="test.class.path">
 		<fileset dir="${lib.test.dir}" includes="**/*" />
-		<fileset dir="${resources.dir}" includes="**/*" />
 	</path>
 
 	<path id="src.class.path">
@@ -47,6 +46,9 @@
 			<classpath refid="test.class.path" />
 			<classpath refid="src.class.path" />
 		</javac>
+		<copy todir="${temp.dir.tests.unit.classes}">
+				<fileset dir="${resources.dir}" includes="**/*" />
+		</copy>
 	</target>
 	
 	<target name="compile-integration-tests">
@@ -82,12 +84,12 @@
 		<fail if="failed-test" message="FAILING TESTS" />
 	</target>
 	
-	<target name="run-integration-tests"	>
+	<target name="run-integration-tests">
 		<junit tempdir="${temp.dir}" fork="yes" forkmode="once" printsummary="true" failureproperty="failed-test">
 			<jvmarg value="-Dfile.encoding=UTF-8" />
 			<classpath>
 				<pathelement path="${src.dir.classes}" />
-				<pathelement path="${temp.dir.tests.unit.classes}" />
+				<pathelement path="${temp.dir.tests.integration.classes}" />
 			</classpath>
 			<classpath refid="test.class.path" />
 			<classpath refid="src.class.path" />
@@ -96,7 +98,7 @@
 			<formatter type="xml" />
 			
 			<batchtest fork="yes" todir="${tests.report}">
-				<fileset dir="${temp.dir.tests.unit.classes}" includes="**/*Test.class" />
+				<fileset dir="${temp.dir.tests.integration.classes}" includes="**/*Test.class" excludes="**/*DatabaseDependentTest.class" />
 			</batchtest>
 		</junit>
 		<fail if="failed-test" message="FAILING TESTS" />
@@ -111,13 +113,7 @@
 	
 	<target name="generate-war" depends="run-all-tests">
 		<mkdir dir="${package.dir}" />
-		<war destfile="${package.dir}/${package.name}.war" basedir="WebContent">
-			
-		</war>
-		
-		<delete includeemptydirs="true" verbose="true" failonerror="false">
-				<fileset dir="${temp.dir}" />
-		</delete>
+		<war destfile="${package.dir}/${package.name}.war" basedir="WebContent" />
 	</target>
 
 </project>
